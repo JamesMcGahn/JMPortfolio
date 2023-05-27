@@ -24,7 +24,7 @@ function AboutSection(props) {
                       <span className={classes.title}>
                         <h3>James McGahn</h3>
                       </span>
-                      <h5>Developer</h5>I am developer located in New Jersey.<br></br> I am interested in solving problems through code and building responsive apps to ensure excellent user
+                      <h5>Developer</h5>I am a developer located in New Jersey.<br></br> I am interested in solving problems through code and building responsive apps to ensure excellent user
                       experiences.
                     </Card.Body>
                   </Card>
