@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /dashboard/
+Disallow: /api/
+
+Sitemap: https://jamesmcgahn.com/sitemap.xml

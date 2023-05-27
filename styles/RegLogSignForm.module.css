@@ -1,0 +1,99 @@
+/* validation coloring is handled in global css file */
+
+.formDiv {
+  padding: 6% 10% 15% 10%;
+  min-height: 80vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: black;
+  background-image: url('/img/breaker2.jpeg');
+
+  background-repeat: repeat-x;
+  background-position: bottom !important;
+}
+
+.formDiv h3 {
+  color: #75158f;
+  text-shadow: -1px -1px 2px #ff00fc, 1px 1px 2px #b7e3fe;
+}
+.formDiv h1 {
+  font-size: 4rem;
+  color: #75158f;
+  font-size: 80px;
+  text-shadow: -2px -2px 2px #ff00fc, 3px 3px 0px #b7e3fe;
+  margin-bottom: 15px;
+}
+
+.formDiv form {
+  width: 60%;
+  border: 3px solid #b7e3fe;
+  padding: 5% 10%;
+}
+.formDiv label {
+  color: #ff00fc;
+}
+
+.formDiv button {
+  background-color: #ff00fc;
+  border-color: #b7e3fe;
+}
+
+.formDiv button:hover {
+  background-color: #b7e3fe;
+  border-color: #ff00fc;
+}
+.formDiv button:focus {
+  background-color: #b7e3fe;
+  border-color: #b7e3fe;
+  box-shadow: 0 0 0 0.25rem #ff00fc;
+}
+
+.captcha {
+  margin-bottom: 10px;
+}
+
+.captchaMessage {
+  color: #ff00fc;
+  font-size: '1rem';
+}
+
+.success {
+  color: #ff00fc;
+}
+
+@media (max-width: 925px) {
+  .formDiv {
+    padding: 6% 0% 10% 0%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .formDiv form {
+    width: 80%;
+    border: 3px solid #b7e3fe;
+    padding: 5% 10%;
+  }
+}
+@media (max-width: 580px) {
+  .formDiv {
+    padding: 14% 0% 10% 0%;
+  }
+  .formDiv h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .formDiv {
+    padding: 19% 0% 10% 0%;
+  }
+  .formDiv form {
+    width: 100%;
+    border: 3px solid #b7e3fe;
+    padding: 5% 10%;
+  }
+}

@@ -1,0 +1,54 @@
+.error {
+  padding: 10%;
+  min-height: 80vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #b7e3fe;
+  padding: 10%;
+}
+
+.message h1 {
+  color: #75158f;
+  text-shadow: -1px -1px 2px #ff00fc, 1px 1px 2px #b7e3fe;
+}
+
+.message h4 {
+  color: #b7e3fe;
+  text-shadow: -1px -1px 2px #b7e3fe, 1px 1px 2px #ff00fc;
+}
+
+.btnDiv {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+div.btnDiv button {
+  border-color: #150937;
+  border-width: 2px;
+  background-color: #75158f !important;
+  border: 3px solid #b7e3fe;
+}
+
+div.btnDiv button:hover {
+  background-color: #b7e3fe !important;
+}
+
+div.btnDiv button:hover {
+  border-color: #b7e3fe;
+}
+
+div.btnDiv button:focus {
+  box-shadow: 0 0 0 0.25rem #b7e3fe;
+}

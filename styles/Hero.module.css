@@ -1,0 +1,73 @@
+.heroCont {
+  background-color: #0c1114;
+  overflow: hidden;
+}
+
+.heroLoading {
+  position: relative;
+  height: 100vh;
+  opacity: 0;
+}
+
+.hero {
+  position: relative;
+  background-color: #0c1114;
+  /* background-image: url('/img/jmlogo3.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  animation: appear 3s;
+  margin-top: 0%;
+  overflow: hidden;
+  height: 100vh;
+  opacity: 1;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#h1 {
+  color: #fff;
+  font-size: 4rem;
+  margin-bottom: 0;
+  text-shadow: -1px -1px 0px #990000, 3px 3px 0px #000000;
+}
+
+#h2 {
+  color: #fff;
+  font-size: 1.7rem;
+  margin-top: 0.1rem;
+  text-shadow: -0.5px -0.5px 2px #990000, 3px 3px 0px #000000;
+}
+
+.chevron {
+  z-index: 10;
+}
+
+.chevron svg {
+  color: #ff00fc;
+  font-size: 1.2rem;
+  margin-bottom: 3px;
+}
+
+@media (max-width: 916px) {
+  .hero {
+    background-position: top;
+    background-size: contain;
+    width: 100%;
+    height: 0;
+    padding-top: 56%;
+  }
+}

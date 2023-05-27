@@ -1,0 +1,41 @@
+.footer {
+  min-height: 25vh;
+  background-color: black;
+  background-image: url('/img/filterbackground.jpg');
+  background-attachment: fixed;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding-top: 2%;
+  width: 100%;
+}
+
+.navDiv {
+  width: 50%;
+}
+
+#nav a {
+  color: white;
+  font-size: 1.3rem;
+  text-shadow: -1px -1px 1px #ff00fc, -1px -1px 5px black;
+}
+
+.rightDiv,
+.leftDiv {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  width: 25%;
+}
+.rightDiv div {
+  width: 100%;
+  text-align: right;
+}
+
+.rightDiv p {
+  padding-right: 10px;
+  color: #fff;
+}
