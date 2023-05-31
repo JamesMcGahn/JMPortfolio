@@ -129,7 +129,6 @@ export async function getStaticPaths() {
     const paths = data.map((project) => ({
       params: { id: project.slug },
     }));
-    console.log(paths);
     return { paths, fallback: true };
   } catch (e) {
     const paths = [];
