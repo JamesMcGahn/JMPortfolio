@@ -50,6 +50,14 @@ const ProjectSchema = new mongoose.Schema({
 
 ProjectSchema.pre("save", function (next) {
   this.slug = slugify(this.title, { lower: true });
+
+  next();
+});
+
+ProjectSchema.pre(/Update/, async function (next) {
+  const updateTitle = this.getUpdate().title;
+
+  this.getUpdate().slug = slugify(updateTitle, { lower: true });
   next();
 });
 
