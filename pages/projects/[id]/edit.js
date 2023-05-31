@@ -25,7 +25,12 @@ function EditSingleProject({ project, id }) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, editorField) => {
+    if (!e && editorField.name) {
+      setForm({ ...form, [editorField.name]: editorField.value });
+      return;
+    }
+
     if (e.target.name === "mainPage") {
       setForm({ ...form, [e.target.name]: e.target.checked });
     } else if (e.target.name === "stack") {
