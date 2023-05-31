@@ -36,7 +36,12 @@ function AddProject(props) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, editorField) => {
+    if (!e && editorField.name) {
+      setForm({ ...form, [editorField.name]: editorField.value });
+      return;
+    }
+
     if (e.target.name === "imageUrl" || e.target.name === "adtlImg") {
       setForm({ ...form, [e.target.name]: [...e.target.files] });
     } else if (e.target.name === "mainPage") {

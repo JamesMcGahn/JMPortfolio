@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import classes from "../../../styles/singleProject.module.css";
 import Carousel from "react-bootstrap/Carousel";
@@ -39,7 +40,6 @@ function SingleProject({ project, notFound }) {
     </a>
   );
 
-  const p = project ? project?.description.split("%newline%") : null;
   return (
     <Container className={classes.outerContainer} fluid>
       <Container className={classes.container} fluid>
@@ -68,7 +68,6 @@ function SingleProject({ project, notFound }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {" "}
                       <ViewButton link={false}>Code</ViewButton>
                     </a>
                   </div>
@@ -81,21 +80,18 @@ function SingleProject({ project, notFound }) {
                   </div>
                   <div className={classes.projectInfo}>
                     <div className={classes.tech}>
-                      <strong>Tech Used:</strong>{" "}
+                      <strong>Tech Used:</strong>
                       {project.stack.map((tech, i) => (
                         <ProjectBadge key={i}>{tech}</ProjectBadge>
                       ))}
                     </div>
                     <div className={classes.description}>
                       <strong>Description:</strong>
-                      <p>
-                        {p.map((des, i) => (
-                          <p key={i}>{des}</p>
-                        ))}
-                      </p>
+                      <ReactMarkdown>{project.description}</ReactMarkdown>
                     </div>
                     <div className={classes.challenges}>
-                      <strong>Challenges:</strong> <p>{project.challenges}</p>
+                      <strong>Challenges:</strong>
+                      <ReactMarkdown>{project.challenges}</ReactMarkdown>
                     </div>
                   </div>
                 </Card>
@@ -106,7 +102,6 @@ function SingleProject({ project, notFound }) {
       </Container>
       <div className={classes.goBackBtnDiv}>
         <LinkWrapper to="/projects">
-          {" "}
           <ViewButton>Go Back</ViewButton>
         </LinkWrapper>
       </div>
