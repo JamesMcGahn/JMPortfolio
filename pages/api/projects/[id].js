@@ -12,7 +12,15 @@ export default async function getProjectId(req, res) {
   switch (method) {
     case "GET":
       try {
-        const project = await Project.findOne({ slug: id });
+        let project = null;
+        const checkForHexRegExp = /^[0-9a-fA-F]{24}$/;
+
+        if (checkForHexRegExp.test(id)) {
+          project = await Project.findById(id);
+        } else {
+          project = await Project.findOne({ slug: id });
+        }
+
         if (!project) return res.status(400).json({ success: false });
 
         res.status(200).json({ success: true, data: project });
