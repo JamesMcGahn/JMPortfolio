@@ -12,7 +12,7 @@ function ImageCarousel({ imagesArr, height, width }) {
             className="d-block w-100"
             src={`${img.url}`}
             alt={`${img.filename}`}
-            style={{ minHeight: '200px' }}
+            style={{ minHeight: '200px', height: 'auto', width: 'auto' }}
             width={width}
             height={height}
           />

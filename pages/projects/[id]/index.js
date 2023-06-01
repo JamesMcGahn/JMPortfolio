@@ -53,8 +53,8 @@ function SingleProject({ project, notFound }) {
                   >
                     <ImageCarousel
                       imagesArr={project.imageUrl}
-                      height={250}
-                      width={444}
+                      height={290}
+                      width={480}
                     />
                   </div>
                   <div className={classes.subtitle}>
@@ -115,7 +115,7 @@ function SingleProject({ project, notFound }) {
         </LinkWrapper>
       </div>
       <DisplayModal show={show} setShow={setShow} project={project}>
-        <ImageCarousel imagesArr={project.imageUrl} height={250} width={444} />
+        <ImageCarousel imagesArr={project.imageUrl} height={290} width={480} />
       </DisplayModal>
     </Container>
   );
