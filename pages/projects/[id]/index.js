@@ -23,7 +23,17 @@ function SingleProject({ project, notFound }) {
   const [show, setShow] = useState(false);
 
   if (router.isFallback) {
-    return <Loading />;
+    return (
+      <Container className={classes.outerContainer} fluid>
+        <Container className={classes.container} fluid>
+          <Card className={classes.card}>
+            <Card.Body>
+              <Loading />
+            </Card.Body>
+          </Card>
+        </Container>
+      </Container>
+    );
   }
 
   if (notFound) {
@@ -144,6 +154,10 @@ export async function getStaticProps(context) {
     await dbConnect();
     const { id } = context.params;
     const project = await Project.findOne({ slug: id }).lean();
+
+    if (!project) {
+      return { notFound: true };
+    }
     return {
       props: { project: JSON.parse(JSON.stringify(project)), notFound: false },
       revalidate: 3600,
