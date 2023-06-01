@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import classes from "../../../styles/singleProject.module.css";
 import Carousel from "react-bootstrap/Carousel";
@@ -12,6 +13,7 @@ import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import LinkWrapper from "../../../components/utils/LinkWrapper";
 import Modal from "react-bootstrap/Modal";
+import Head from "next/head";
 
 function SingleProject({ project, notFound }) {
   const router = useRouter();
@@ -25,9 +27,9 @@ function SingleProject({ project, notFound }) {
   if (notFound) {
     return (
       <>
-        <head>
+        <Head>
           <meta name="robots" content="noindex" />
-        </head>
+        </Head>
         <DefaultErrorPage statusCode={404} />
       </>
     );
@@ -39,7 +41,6 @@ function SingleProject({ project, notFound }) {
     </a>
   );
 
-  const p = project ? project?.description.split("%newline%") : null;
   return (
     <Container className={classes.outerContainer} fluid>
       <Container className={classes.container} fluid>
@@ -88,14 +89,11 @@ function SingleProject({ project, notFound }) {
                     </div>
                     <div className={classes.description}>
                       <strong>Description:</strong>
-                      <p>
-                        {p.map((des, i) => (
-                          <p key={i}>{des}</p>
-                        ))}
-                      </p>
+                      <ReactMarkdown>{project.description}</ReactMarkdown>
                     </div>
                     <div className={classes.challenges}>
-                      <strong>Challenges:</strong> <p>{project.challenges}</p>
+                      <strong>Challenges:</strong>
+                      <ReactMarkdown>{project.challenges}</ReactMarkdown>
                     </div>
                   </div>
                 </Card>
