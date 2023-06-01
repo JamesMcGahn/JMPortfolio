@@ -48,7 +48,7 @@ function EditSingleProject({ project }) {
     try {
       const res = await axios
         .put(
-          `${process.env.NEXT_PUBLIC_SERVER}/api/auth/projects/${project._id}`,
+          `${process.env.NEXT_PUBLIC_SERVER}/api/projects/${project._id}`,
           form
         )
         .then((res) => {

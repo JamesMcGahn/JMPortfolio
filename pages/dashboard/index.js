@@ -30,11 +30,10 @@ function Dashboard({ projects, art }) {
       const path = type === "project" ? "projects" : "art";
 
       const res = await axios
-        .delete(`${process.env.NEXT_PUBLIC_SERVER}/api/auth/${path}/${id}`, {
+        .delete(`${process.env.NEXT_PUBLIC_SERVER}/api/${path}/${id}`, {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
-          console.log(res);
           router.replace(router.asPath);
         });
     } catch (e) {
