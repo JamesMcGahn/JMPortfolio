@@ -26,7 +26,6 @@ function AddProject(props) {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    console.log("submit");
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false) {
       e.stopPropagation();

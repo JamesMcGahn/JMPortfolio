@@ -41,7 +41,6 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn(user, account, profile) {
-      console.log(user.user);
       const isAllowedToSignIn = user.user.email === process.env.LOGIN;
 
       if (isAllowedToSignIn) {

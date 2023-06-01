@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import classes from "../../styles/art.module.css";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import BootImage from "react-bootstrap/Image";
 import PageHead from "../../components/layout/PageHead";
 
