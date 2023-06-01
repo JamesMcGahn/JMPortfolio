@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Row from "react-bootstrap/Row";
@@ -26,6 +26,7 @@ function AddProject(props) {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    console.log("submit");
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false) {
       e.stopPropagation();
@@ -52,6 +53,7 @@ function AddProject(props) {
   };
 
   const createProject = async () => {
+    console.log("hereeree");
     const sendForm = new FormData();
 
     sendForm.append("title", form.title);

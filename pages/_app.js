@@ -5,9 +5,9 @@ import Layout from "../components/layout/Layout";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 import "../public/css/nprogress.css";
-import { Provider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
 
   NProgress.configure({
@@ -39,11 +39,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <title>James McGahn</title>
-      <Provider session={pageProps.session}>
+      <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Provider>
+      </SessionProvider>
     </>
   );
 }

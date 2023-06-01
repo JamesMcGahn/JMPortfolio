@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Row from "react-bootstrap/Row";

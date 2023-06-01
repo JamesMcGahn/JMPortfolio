@@ -1,6 +1,6 @@
 import dbConnect from "../../../../utils/dbConnect";
 import Project from "../../../../models/Project";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import multer from "multer";
 const cloudinary = require("cloudinary").v2;
 import { CloudinaryStorage } from "multer-storage-cloudinary";
@@ -29,6 +29,8 @@ const upload = pify(multer({ storage }).array("imageUrl"));
 
 export default async function projectPost(req, res) {
   const session = await getSession({ req });
+  console.log(session);
+  console.log("here");
   if (session && req.method === "POST") {
     try {
       await dbConnect();
@@ -45,6 +47,7 @@ export default async function projectPost(req, res) {
       await project.save();
       res.status(201).send({ project: project.slug });
     } catch (err) {
+      console.log(err);
       res.status(400).json({ success: false, message: err });
     }
   } else {

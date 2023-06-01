@@ -64,14 +64,12 @@ function ProjectsSection({ projects, mainPage }) {
         <Row id={classes.cardRow}>
           {projectData.map((project, i) => {
             const img = (
-              <a>
-                <Image
-                  variant="top"
-                  src={project.imageUrl[0]?.url}
-                  fluid
-                  alt="project image"
-                />
-              </a>
+              <Image
+                variant="top"
+                src={project.imageUrl[0]?.url}
+                fluid
+                alt="project image"
+              />
             );
             return (
               <Col
@@ -83,9 +81,7 @@ function ProjectsSection({ projects, mainPage }) {
               >
                 <Card className={classes.projectCard}>
                   <div className={classes.projectImg}>
-                    <Link href={`/projects/${project.slug}`} passHref>
-                      {img}
-                    </Link>
+                    <Link href={`/projects/${project.slug}`}>{img}</Link>
                   </div>
                   <span className={classes.title}>
                     {" "}

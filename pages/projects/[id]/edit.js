@@ -1,5 +1,5 @@
 import React from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";

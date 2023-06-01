@@ -1,6 +1,6 @@
 import dbConnect from "../../../../../utils/dbConnect";
 import Project from "../../../../../models/Project";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 const cloudinary = require("cloudinary").v2;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
