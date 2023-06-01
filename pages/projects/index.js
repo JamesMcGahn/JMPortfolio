@@ -17,6 +17,7 @@ export default Projects;
 
 export async function getStaticProps() {
   await dbConnect();
+  const projects = await Project.find({}).lean();
 
   return {
     props: { projects: JSON.parse(JSON.stringify(projects)) },
