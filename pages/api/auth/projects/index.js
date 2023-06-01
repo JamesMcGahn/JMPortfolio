@@ -29,8 +29,7 @@ const upload = pify(multer({ storage }).array("imageUrl"));
 
 export default async function projectPost(req, res) {
   const session = await getSession({ req });
-  console.log(session);
-  console.log("here");
+
   if (session && req.method === "POST") {
     try {
       await dbConnect();

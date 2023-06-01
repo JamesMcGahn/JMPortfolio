@@ -18,8 +18,7 @@ export const authOptions = {
           await dbConnect();
           const username = credentials.username;
           const userFound = await User.findOne({ username });
-          console.log(credentials.username);
-          console.log(userFound);
+
           if (!userFound) {
             return null;
           }
@@ -27,9 +26,8 @@ export const authOptions = {
             credentials.password,
             userFound.password
           );
-          console.log("passowrd", valid);
+
           if (valid) {
-            console.log("here- valid");
             return { email: username };
           } else {
             return "/dashboard/error";
@@ -64,6 +62,7 @@ export const authOptions = {
   jwt: {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

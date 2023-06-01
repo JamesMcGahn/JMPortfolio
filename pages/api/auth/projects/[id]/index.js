@@ -1,6 +1,8 @@
 import dbConnect from "../../../../../utils/dbConnect";
 import Project from "../../../../../models/Project";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../[...nextauth]";
+
 const cloudinary = require("cloudinary").v2;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -14,7 +16,8 @@ export default async function projectUpdate(req, res) {
     method,
   } = req;
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
+  console.log(session);
   if (session) {
     await dbConnect();
 
