@@ -1,18 +1,18 @@
-import React from "react";
-import Hero from "../components/sections/Hero";
-import AboutSection from "../components/sections/AboutSection";
-import ProjectsSection from "../components/sections/ProjectsSection";
-import BreakSection from "../components/sections/BreakSection";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { useSession } from "next-auth/react";
-import classes from "../styles/index.module.css";
-import LinkWrapper from "../components/utils/LinkWrapper";
-import PageHead from "../components/layout/PageHead";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Hero from '../components/sections/Hero';
+import AboutSection from '../components/sections/AboutSection';
+import ProjectsSection from '../components/sections/ProjectsSection';
+import BreakSection from '../components/sections/BreakSection';
+import classes from '../styles/index.module.css';
+import LinkWrapper from '../components/utils/LinkWrapper';
+import PageHead from '../components/layout/PageHead';
+import dbConnect from '../utils/dbConnect';
+import Project from '../models/Project';
 
 export default function Home({ projects }) {
-  const { data: session, status } = useSession();
   return (
     <div>
       <PageHead title="James McGahn | Home" />
@@ -46,15 +46,12 @@ export default function Home({ projects }) {
           </div>
         </div>
       </BreakSection>
-      <ProjectsSection projects={projects} mainPage={true} />
+      <ProjectsSection projects={projects} mainPage />
     </div>
   );
 }
 
-import dbConnect from "../utils/dbConnect";
-import Project from "../models/Project";
-
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   await dbConnect();
   const projects = await Project.find({ mainPage: true }).lean();
   return {

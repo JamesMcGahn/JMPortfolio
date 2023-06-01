@@ -4,6 +4,7 @@
   "rules": {
     "prettier/prettier": "off",
     "object-curly-newline": "off",
+    "react/jsx-props-no-spreading": "off",
     "spaced-comment": "off",
     "no-console": "warn",
     "consistent-return": "off",
