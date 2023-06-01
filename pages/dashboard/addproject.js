@@ -38,8 +38,11 @@ function AddProject(props) {
   };
 
   const handleChange = (e, editorField) => {
-    if (!e && editorField.name) {
-      setForm({ ...form, [editorField.name]: editorField.value });
+    if (editorField?.name) {
+      setForm((prev) => ({
+        ...prev,
+        [editorField.name]: editorField.value,
+      }));
       return;
     }
 
@@ -47,13 +50,12 @@ function AddProject(props) {
       setForm({ ...form, [e.target.name]: [...e.target.files] });
     } else if (e.target.name === "mainPage") {
       setForm({ ...form, [e.target.name]: e.target.checked });
-    } else {
+    } else if (e) {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
 
   const createProject = async () => {
-    console.log("hereeree");
     const sendForm = new FormData();
 
     sendForm.append("title", form.title);
