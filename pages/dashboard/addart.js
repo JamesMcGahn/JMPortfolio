@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Row from "react-bootstrap/Row";
@@ -44,7 +44,7 @@ function AddArt(props) {
     form.imageUrl.forEach((file) => sendForm.append("imageUrl", file));
     try {
       const res = await axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/auth/art`, sendForm, {
+        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/art`, sendForm, {
           headers: { "content-type": "multipart/form-data" },
         })
         .then((res) => {

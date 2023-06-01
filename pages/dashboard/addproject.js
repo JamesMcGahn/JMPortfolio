@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Row from "react-bootstrap/Row";
@@ -36,12 +36,20 @@ function AddProject(props) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, editorField) => {
+    if (editorField?.name) {
+      setForm((prev) => ({
+        ...prev,
+        [editorField.name]: editorField.value,
+      }));
+      return;
+    }
+
     if (e.target.name === "imageUrl" || e.target.name === "adtlImg") {
       setForm({ ...form, [e.target.name]: [...e.target.files] });
     } else if (e.target.name === "mainPage") {
       setForm({ ...form, [e.target.name]: e.target.checked });
-    } else {
+    } else if (e) {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
@@ -61,7 +69,7 @@ function AddProject(props) {
     sendForm.append("liveUrl", form.liveUrl);
     try {
       const res = await axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/auth/projects`, sendForm, {
+        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/projects`, sendForm, {
           headers: { "content-type": "multipart/form-data" },
         })
         .then((res) => {
