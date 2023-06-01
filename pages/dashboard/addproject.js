@@ -70,7 +70,7 @@ function AddProject(props) {
     sendForm.append("liveUrl", form.liveUrl);
     try {
       const res = await axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/auth/projects`, sendForm, {
+        .post(`${process.env.NEXT_PUBLIC_SERVER}/api/projects`, sendForm, {
           headers: { "content-type": "multipart/form-data" },
         })
         .then((res) => {

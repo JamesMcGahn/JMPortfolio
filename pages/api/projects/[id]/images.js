@@ -1,10 +1,11 @@
-import Project from "../../../../../models/Project";
+import Project from "../../../../models/Project";
 import pify from "pify";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../auth/[...nextauth]";
 import multer from "multer";
 const cloudinary = require("cloudinary").v2;
 import { CloudinaryStorage } from "multer-storage-cloudinary";
-import dbConnect from "../../../../../utils/dbConnect";
+import dbConnect from "../../../../utils/dbConnect";
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_KEY,
@@ -32,7 +33,7 @@ export default async function imagesUpdate(req, res) {
     method,
   } = req;
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
   if (session) {
     await dbConnect();
     switch (method) {

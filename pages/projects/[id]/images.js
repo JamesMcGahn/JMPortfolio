@@ -58,7 +58,7 @@ function EditSingleProjectImages({ project, id }) {
     try {
       const res = await axios
         .put(
-          `${process.env.NEXT_PUBLIC_SERVER}/api/auth/projects/${id}/images`,
+          `${process.env.NEXT_PUBLIC_SERVER}/api/projects/${id}/images`,
           sendForm,
           { headers: { "content-type": "multipart/form-data" } }
         )
