@@ -13,7 +13,15 @@ function Hero({ h1, h2 }) {
       <Container className={loading ? classes.hero : classes.heroLoading} fluid>
         <h1 id={classes.h1}>{h1}</h1>
         <h2 id={classes.h2}>{h2}</h2>
-        <Image src="/img/jmlogo4.jpg" alt="hero" layout="fill" quality="100" objectFit="cover" priority={true} onLoadingComplete={() => setLoading(true)} />
+        <Image
+          src="/img/jmlogo4.jpg"
+          alt="hero"
+          layout="fill"
+          quality="100"
+          objectFit="cover"
+          priority
+          onLoadingComplete={() => setLoading(true)}
+        />
         <div className={classes.chevron}>
           <a href="#about">
             <FontAwesomeIcon icon={faChevronDown} />
