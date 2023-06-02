@@ -100,7 +100,7 @@ function ContactPage() {
         >
           <div className={classes.captcha}>
             <ReCAPTCHA
-              sitekey={process.env.CAPTCHA_SITE_KEY}
+              sitekey={`${process.env.CAPTCHA_SITE_KEY}`}
               // eslint-disable-next-line
               onChange={onChange}
               size="compact"
