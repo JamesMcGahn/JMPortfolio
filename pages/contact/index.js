@@ -19,6 +19,8 @@ function ContactPage() {
     message: '',
   });
 
+  const siteKey = `${process.env.CAPTCHA_SITE_KEY}`;
+  console.log(siteKey);
   async function onChange(value) {
     try {
       await axios
@@ -100,7 +102,8 @@ function ContactPage() {
         >
           <div className={classes.captcha}>
             <ReCAPTCHA
-              sitekey={`${process.env.CAPTCHA_SITE_KEY}`}
+              // trunk-ignore(gitleaks/generic-api-key)
+              sitekey="6Lc55RkUAAAAAOPJdIsuhK5bnstiQD8H3t9rV_ml"
               // eslint-disable-next-line
               onChange={onChange}
               size="compact"
