@@ -1,7 +1,8 @@
-import dbConnect from '../../../../utils/dbConnect';
-import Project from '../../../../models/Project.js';
 import { getServerSession } from 'next-auth/next';
+import dbConnect from '../../../../utils/dbConnect';
+import Project from '../../../../models/Project';
 import { authOptions } from '../../auth/[...nextauth]';
+
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({

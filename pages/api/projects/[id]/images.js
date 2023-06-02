@@ -1,11 +1,13 @@
-import Project from "../../../../models/Project";
-import pify from "pify";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]";
-import multer from "multer";
-const cloudinary = require("cloudinary").v2;
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import dbConnect from "../../../../utils/dbConnect";
+import pify from 'pify';
+import { getServerSession } from 'next-auth/next';
+import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import { authOptions } from '../../auth/[...nextauth]';
+import dbConnect from '../../../../utils/dbConnect';
+import Project from '../../../../models/Project';
+
+const cloudinary = require('cloudinary').v2;
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_KEY,
@@ -15,8 +17,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "jamesmcgahn",
-    allowedFormats: ["jpeg", "png", "jpg", "gif"],
+    folder: 'jamesmcgahn',
+    allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
   },
 });
 
@@ -25,7 +27,7 @@ export const config = {
     bodyParser: false,
   },
 };
-const upload = pify(multer({ storage }).array("imageUrl"));
+const upload = pify(multer({ storage }).array('imageUrl'));
 
 export default async function imagesUpdate(req, res) {
   const {
@@ -37,7 +39,7 @@ export default async function imagesUpdate(req, res) {
   if (session) {
     await dbConnect();
     switch (method) {
-      case "PUT":
+      case 'PUT':
         try {
           await upload(req, res);
           const project = await Project.findById(id);
@@ -51,15 +53,20 @@ export default async function imagesUpdate(req, res) {
             await project.updateOne({
               $pull: { imageUrl: { filename: { $in: req.body.delete } } },
             });
-            for (let filename of req.body.delete) {
-              cloudinary.uploader.destroy(filename);
-            }
+            const results = [];
+            req.body.delete.forEach((pic) => {
+              results.push(cloudinary.uploader.destroy(pic));
+            });
+            await Promise.all(results);
           }
           return res.status(201).send({ success: true });
         } catch (err) {
+          console.log(err);
           res.status(400).json({ success: false });
         }
         break;
+      default:
+        res.status(401).json({ success: false });
     }
   }
 }
