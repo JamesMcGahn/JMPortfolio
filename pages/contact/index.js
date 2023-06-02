@@ -19,8 +19,6 @@ function ContactPage() {
     message: '',
   });
 
-  const siteKey = `${process.env.CAPTCHA_SITE_KEY}`;
-  console.log(siteKey);
   async function onChange(value) {
     try {
       await axios
