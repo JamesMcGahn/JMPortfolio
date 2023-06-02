@@ -1,11 +1,12 @@
-import dbConnect from "../../../utils/dbConnect";
-import Project from "../../../models/Project.js";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
-import multer from "multer";
-const cloudinary = require("cloudinary").v2;
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import pify from "pify";
+import { getServerSession } from 'next-auth/next';
+import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import pify from 'pify';
+import { authOptions } from '../auth/[...nextauth]';
+import dbConnect from '../../../utils/dbConnect';
+import Project from '../../../models/Project';
+
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -16,8 +17,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "jamesmcgahn",
-    allowedFormats: ["jpeg", "png", "jpg", "gif"],
+    folder: 'jamesmcgahn',
+    allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
   },
 });
 
@@ -27,13 +28,13 @@ export const config = {
   },
 };
 
-const upload = pify(multer({ storage }).array("imageUrl"));
+const upload = pify(multer({ storage }).array('imageUrl'));
 
 export default async function getProject(req, res) {
   const { method } = req;
   const session = await getServerSession(req, res, authOptions);
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
         await dbConnect();
         const projects = await Project.find({});
@@ -42,7 +43,7 @@ export default async function getProject(req, res) {
         res.status(400).json({ success: false });
       }
       break;
-    case "POST":
+    case 'POST':
       if (session) {
         try {
           await dbConnect();
@@ -54,7 +55,7 @@ export default async function getProject(req, res) {
             filename: image.filename,
           }));
           project.stack = req.body.stack
-            .split(",")
+            .split(',')
             .map((item) => item.trim().toLowerCase());
           await project.save();
           res.status(201).send({ project: project.slug });
@@ -63,6 +64,7 @@ export default async function getProject(req, res) {
           res.status(400).json({ success: false, message: err });
         }
       }
+      break;
     default:
       res.status(400).json({ success: false });
       break;
