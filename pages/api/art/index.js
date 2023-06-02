@@ -1,11 +1,12 @@
-import dbConnect from "../../../utils/dbConnect";
-import Art from "../../../models/Art.js";
-import multer from "multer";
-const cloudinary = require("cloudinary").v2;
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import pify from "pify";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
+import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import pify from 'pify';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../auth/[...nextauth]';
+import dbConnect from '../../../utils/dbConnect';
+import Art from '../../../models/Art';
+
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -16,8 +17,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "jamesmcgahn",
-    allowedFormats: ["jpeg", "png", "jpg", "gif"],
+    folder: 'jamesmcgahn',
+    allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
   },
 });
 
@@ -27,7 +28,7 @@ export const config = {
   },
 };
 
-const upload = pify(multer({ storage }).array("imageUrl"));
+const upload = pify(multer({ storage }).array('imageUrl'));
 
 export default async function art(req, res) {
   const { method } = req;
@@ -35,32 +36,33 @@ export default async function art(req, res) {
   await dbConnect();
 
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
-        const art = await Art.find({});
-        res.status(200).json({ success: true, data: art });
+        const artPieces = await Art.find({});
+        res.status(200).json({ success: true, data: artPieces });
       } catch (err) {
         res.status(400).json({ success: false });
       }
       break;
-    case "POST":
+    case 'POST':
       if (session) {
         try {
           await dbConnect();
           await upload(req, res);
 
-          const art = await Art.create(req.body);
-          art.imageUrl = req.files.map((image) => ({
+          const newArt = await Art.create(req.body);
+          newArt.imageUrl = req.files.map((image) => ({
             url: image.path,
             filename: image.filename,
           }));
-          await art.save();
-          res.status(201).send({ art: art.id });
+          await newArt.save();
+          res.status(201).send({ art: newArt.id });
         } catch (err) {
+          console.log(err);
           res.status(400).json({ success: false });
         }
-        break;
       }
+      break;
     default:
       res.status(401).json({ success: false });
       break;
