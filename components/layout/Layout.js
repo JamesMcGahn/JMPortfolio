@@ -6,7 +6,7 @@ import DashNav from './nav/DashNav';
 import Footer from './Footer';
 
 function Layout({ children }) {
-  // trunk-ignore(eslint/no-unused-vars)
+  // eslint-disable-next-line
   const { data: session, status } = useSession();
   const router = useRouter();
   return (

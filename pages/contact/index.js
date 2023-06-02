@@ -100,9 +100,8 @@ function ContactPage() {
         >
           <div className={classes.captcha}>
             <ReCAPTCHA
-              // trunk-ignore(gitleaks/generic-api-key)
-              sitekey="6Lc55RkUAAAAAOPJdIsuhK5bnstiQD8H3t9rV_ml"
-              // trunk-ignore(eslint/react/jsx-no-bind)
+              sitekey={process.env.CAPTCHA_SITE_KEY}
+              // eslint-disable-next-line
               onChange={onChange}
               size="compact"
               theme="dark"

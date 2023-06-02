@@ -30,7 +30,7 @@ function DefaultErrorPage({ statusCode }) {
 }
 
 DefaultErrorPage.getInitialProps = ({ res, err }) => {
-  // trunk-ignore(eslint/no-nested-ternary)
+  // eslint-disable-next-line
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };

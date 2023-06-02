@@ -21,7 +21,7 @@ function ProjectCard({ stack, description, title, id }) {
           <div>
             Tech:
             {stack?.map((tech, i) => (
-              // trunk-ignore(eslint/react/no-array-index-key)
+              // eslint-disable-next-line
               <ProjectBadge key={`${tech}-${i}`}>{tech}</ProjectBadge>
             ))}
           </div>
