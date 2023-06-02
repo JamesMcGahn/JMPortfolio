@@ -125,7 +125,7 @@ function SingleProject({ project, notFound }) {
         </LinkWrapper>
       </div>
       <DisplayModal show={show} setShow={setShow} project={project}>
-        <ImageCarousel imagesArr={project.imageUrl} height={290} width={480} />
+        <ImageCarousel imagesArr={project.imageUrl} />
       </DisplayModal>
     </Container>
   );
