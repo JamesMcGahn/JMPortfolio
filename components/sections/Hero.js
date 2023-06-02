@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
-import classes from '../../styles/Hero.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import classes from '../../styles/Hero.module.css';
 
 function Hero({ h1, h2 }) {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 function ImageCarousel({ imagesArr, height, width }) {
   const moreThanOneImg = imagesArr.length > 1;
