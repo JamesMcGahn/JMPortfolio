@@ -1,12 +1,12 @@
-import React from "react";
-import classes from "../../styles/Footer.module.css";
-import Nav from "react-bootstrap/Nav";
-import Link from "next/link";
+import React from 'react';
+import Nav from 'react-bootstrap/Nav';
+import Link from 'next/link';
+import classes from '../../styles/Footer.module.css';
 
-function Footer(props) {
+function Footer() {
   return (
     <div className={classes.footer}>
-      <div className={classes.leftDiv}></div>
+      <div className={classes.leftDiv} />
       <div className={classes.navDiv}>
         <Nav className="justify-content-center" id={classes.nav}>
           <Link href="/" legacyBehavior passHref>

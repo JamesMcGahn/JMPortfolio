@@ -1,12 +1,12 @@
-import React from "react";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import Link from "next/link";
-import classes from "../../styles/dashBoardProjectTable.module.css";
+import React from 'react';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
+import classes from '../../styles/dashBoardProjectTable.module.css';
 
 function DashboardProjectTable({ projects, handleDelete }) {
   const handleModalDelete = (id, title) => {
-    handleDelete(id, title, "project");
+    handleDelete(id, title, 'project');
   };
 
   return (
@@ -34,7 +34,7 @@ function DashboardProjectTable({ projects, handleDelete }) {
             <td className="col-1">{`${project.mainPage}`}</td>
             <td className="col-3">{project.subtitle}</td>
             <td className="col-3">
-              {project.stack?.map((tech, i) => `${tech}, `)}
+              {project.stack?.map((tech) => `${tech}, `)}
             </td>
             <td className="col-3">
               <div className={classes.btnDiv}>

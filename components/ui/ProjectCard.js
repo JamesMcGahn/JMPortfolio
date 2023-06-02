@@ -1,24 +1,12 @@
-import React from "react";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import ProjectBadge from "../../components/ui/ProjectBadge";
-import Button from "react-bootstrap/Button";
-import Link from "next/link";
-import classes from "../styles/projectsSection.module.css";
-function ProjectCard({
-  stack,
-  description,
-  title,
-  id,
-  handleClose,
-  handleDelete,
-  show,
-  handleShow,
-}) {
+import React from 'react';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Link from 'next/link';
+import ProjectBadge from './ProjectBadge';
+import classes from '../../styles/projectsSection.module.css';
+
+function ProjectCard({ stack, description, title, id }) {
   const img = <Card.Img variant="top" src="/img/headshot.jpg" />;
-  const handleModalDelete = () => {
-    handleDelete(id, title);
-  };
 
   return (
     <Col xs={12} md={4} className={classes.projectTile} key={id}>
@@ -26,14 +14,14 @@ function ProjectCard({
         <Link href={`/projects/${id}`}>{img}</Link>
         <Card.Body>
           <span className={classes.title}>
-            {" "}
             <h5>
               <Link href={`/projects/${id}`}>{title}</Link>
             </h5>
           </span>
           <div>
-            Tech:{" "}
+            Tech:
             {stack?.map((tech, i) => (
+              // eslint-disable-next-line
               <ProjectBadge key={`${tech}-${i}`}>{tech}</ProjectBadge>
             ))}
           </div>

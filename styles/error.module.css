@@ -39,6 +39,7 @@ div.btnDiv button {
   border-width: 2px;
   background-color: #75158f !important;
   border: 3px solid #b7e3fe;
+  width: 7em;
 }
 
 div.btnDiv button:hover {

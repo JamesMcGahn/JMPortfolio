@@ -1,20 +1,24 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import classes from "../../../styles/DashNav.module.css";
-import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-function DashNav(props) {
-  const { data: session, status } = useSession();
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import classes from '../../../styles/DashNav.module.css';
+
+function DashNav() {
+  const { data: session } = useSession();
   return (
     <Container className={classes.container} fluid>
       <Navbar id={classes.nav} bg="dark" expand="lg" variant="dark">
         <Container>
           <Navbar.Text>
-            Signed in as: {session.user.email}{" "}
-            <button className={classes.signOut} onClick={() => signOut()}>
+            Signed in as: {session.user.email}
+            <button
+              type="button"
+              className={classes.signOut}
+              onClick={() => signOut()}
+            >
               Sign out
             </button>
           </Navbar.Text>

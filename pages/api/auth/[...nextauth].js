@@ -1,22 +1,22 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import dbConnect from "../../../utils/dbConnect";
-import User from "../../../models/User.js";
-import bcrypt from "bcrypt";
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
+import dbConnect from '../../../utils/dbConnect';
+import User from '../../../models/User';
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: "Login",
+      name: 'Login',
       credentials: {
-        username: { label: "email", type: "text", placeholder: "bob@bob.com" },
-        password: { label: "password", type: "password", placeholder: "" },
+        username: { label: 'email', type: 'text', placeholder: 'bob@bob.com' },
+        password: { label: 'password', type: 'password', placeholder: '' },
       },
 
       async authorize(credentials, req) {
         try {
           await dbConnect();
-          const username = credentials.username;
+          const { username } = credentials;
           const userFound = await User.findOne({ username });
 
           if (!userFound) {
@@ -24,14 +24,13 @@ export const authOptions = {
           }
           const valid = await bcrypt.compare(
             credentials.password,
-            userFound.password
+            userFound.password,
           );
 
           if (valid) {
             return { email: username };
-          } else {
-            return "/dashboard/error";
           }
+          return '/dashboard/error';
         } catch (e) {
           console.log(e);
           return null;
@@ -40,20 +39,19 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn(user, account, profile) {
+    async signIn(user) {
       const isAllowedToSignIn = user.user.email === process.env.LOGIN;
 
       if (isAllowedToSignIn) {
         return true;
-      } else {
-        return false;
       }
+      return false;
     },
   },
   pages: {
-    signIn: "/dashboard/login",
-    signOut: "/auth/signout",
-    error: "/error",
+    signIn: '/dashboard/login',
+    signOut: '/auth/signout',
+    error: '/error',
   },
   session: {
     jwt: true,

@@ -1,22 +1,18 @@
-import React, { useState } from "react";
-import { getSession } from "next-auth/react";
-import axios from "axios";
-import { useRouter } from "next/router";
-
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import classes from "../../styles/dashboard.module.css";
-import DashboardProjectTable from "../../components/dashboard/DashboardProjectTable";
-import DashboardImageTable from "../../components/dashboard/DashboardImageTable";
+import React, { useState } from 'react';
+import { getSession } from 'next-auth/react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import classes from '../../styles/dashboard.module.css';
+import DashboardProjectTable from '../../components/dashboard/DashboardProjectTable';
+import DashboardImageTable from '../../components/dashboard/DashboardImageTable';
 
 function Dashboard({ projects, art }) {
   const [show, setShow] = useState(false);
-  // const [displayProjects, setdisplayProjects] = useState(projects);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [modalItem, setModalItem] = useState({ id: "", title: "", type: "" });
+  const [modalItem, setModalItem] = useState({ id: '', title: '', type: '' });
   const router = useRouter();
 
   const handleDelete = (id, title, type) => {
@@ -27,11 +23,11 @@ function Dashboard({ projects, art }) {
   const deleteProject = async (id, type) => {
     try {
       setShow(false);
-      const path = type === "project" ? "projects" : "art";
+      const path = type === 'project' ? 'projects' : 'art';
 
-      const res = await axios
+      await axios
         .delete(`${process.env.NEXT_PUBLIC_SERVER}/api/${path}/${id}`, {
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => {
           router.replace(router.asPath);
@@ -74,7 +70,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };
@@ -86,15 +82,15 @@ export const getServerSideProps = async (context) => {
   return { props: { session: session, projects: data, art: art } };
 };
 
-const DeleteModal = ({ id, title, type, show, setShow, deleteProject }) => {
+function DeleteModal({ id, title, type, show, setShow, deleteProject }) {
   const handleClose = () => setShow(false);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Delete {title}</Modal.Title>
+        <Modal.Title>{`Delete ${title}`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Are you sure you want to delete this Project {title}
+        {`Are you sure you want to delete this Project ${title}`}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -106,4 +102,4 @@ const DeleteModal = ({ id, title, type, show, setShow, deleteProject }) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}

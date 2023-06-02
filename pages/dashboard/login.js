@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { getCsrfToken } from "next-auth/react";
-import classes from "../../styles/RegLogSignForm.module.css";
+import React, { useState } from 'react';
+import { getCsrfToken } from 'next-auth/react';
+import classes from '../../styles/RegLogSignForm.module.css';
+import RegLogSignForm from '../../components/forms/RegLogSignForm';
 
-import RegLogSignForm from "../../components/forms/RegLogSignForm";
 function Login(props) {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState();
-  const router = useRouter();
   const { csrfToken } = props;
 
   const handleSubmit = async (e) => {
@@ -15,18 +13,16 @@ function Login(props) {
       e.preventDefault();
       e.stopPropagation();
       setValidated(true);
-    } else {
-      // setSubmitting(true)
     }
   };
 
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]:
-        e.target.name === "stack" ? e.target.value.split(",") : e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
+
   return (
     <div className={classes.formDiv}>
       <div>
@@ -34,7 +30,7 @@ function Login(props) {
       </div>
       <RegLogSignForm
         action={`${process.env.NEXT_PUBLIC_SERVER}/api/auth/callback/credentials`}
-        method={"POST"}
+        method="POST"
         handleChange={handleChange}
         validated={validated}
         handleSubmit={handleSubmit}

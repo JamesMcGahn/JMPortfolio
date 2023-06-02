@@ -1,30 +1,26 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router'
+import React from 'react';
 import PageHead from '../../components/layout/PageHead';
-import ProjectsSection from '../../components/sections/ProjectsSection'
+import ProjectsSection from '../../components/sections/ProjectsSection';
+import dbConnect from '../../utils/dbConnect';
+import Project from '../../models/Project';
 
 function Projects({ projects }) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const router = useRouter()
-
-    return (
-        <div>
-            <PageHead title="James McGahn | Projects" />
-            <ProjectsSection projects={projects} mainPage={false} />
-        </div >
-    );
+  return (
+    <div>
+      <PageHead title="James McGahn | Projects" />
+      <ProjectsSection projects={projects} mainPage={false} />
+    </div>
+  );
 }
 
 export default Projects;
 
-import dbConnect from '../../utils/dbConnect'
-import Project from "../../models/Project"
+export async function getStaticProps() {
+  await dbConnect();
+  const projects = await Project.find({}).lean();
 
-export async function getStaticProps(context) {
-    await dbConnect()
-    const projects = await Project.find({}).lean()
-
-    return { props: { projects: JSON.parse(JSON.stringify(projects)) }, revalidate: 3600 }
+  return {
+    props: { projects: JSON.parse(JSON.stringify(projects)) },
+    revalidate: 3600,
+  };
 }

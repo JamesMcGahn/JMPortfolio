@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import ProjectBadge from "../../components/ui/ProjectBadge";
-import Button from "react-bootstrap/Button";
-import ViewButton from "../ui/ViewButton";
-import classes from "../../styles/projectsSection.module.css";
-import LinkWrapper from "../utils/LinkWrapper";
-import Image from "react-bootstrap/Image";
-import { stackOptions } from "../../constants/projectStackOpts";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+import ProjectBadge from '../ui/ProjectBadge';
+import ViewButton from '../ui/ViewButton';
+import classes from '../../styles/projectsSection.module.css';
+import LinkWrapper from '../utils/LinkWrapper';
+import { stackOptions } from '../../constants/projectStackOpts';
 
 function ProjectsSection({ projects, mainPage }) {
   const reverse = [...projects].reverse();
@@ -20,7 +20,7 @@ function ProjectsSection({ projects, mainPage }) {
   const [projectData, setProjectData] = useState(initialProjects);
 
   function handleChange(val) {
-    if (val === "all") return setProjectData(initialProjects);
+    if (val === 'all') return setProjectData(initialProjects);
 
     const data = projects
       .filter((project) => project.stack.includes(val))
@@ -45,24 +45,26 @@ function ProjectsSection({ projects, mainPage }) {
           <Row className="justify-content-start">
             <Col xs="auto">
               <div className={classes.select}>
-                <label htmlFor="tech">Choose Tech:</label>
-                <select
-                  name="tech"
-                  id="tech"
-                  onChange={(e) => handleChange(e.target.value)}
-                >
-                  {options.map((option) => (
-                    <option value={option.toLowerCase()} key={option}>
-                      {option}{" "}
-                    </option>
-                  ))}
-                </select>
+                <label htmlFor="tech">
+                  Choose Tech:
+                  <select
+                    name="tech"
+                    id="tech"
+                    onChange={(e) => handleChange(e.target.value)}
+                  >
+                    {options.map((option) => (
+                      <option value={option.toLowerCase()} key={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
             </Col>
           </Row>
         )}
         <Row id={classes.cardRow}>
-          {projectData.map((project, i) => {
+          {projectData.map((project) => {
             const img = (
               <Image
                 variant="top"
@@ -84,7 +86,6 @@ function ProjectsSection({ projects, mainPage }) {
                     <Link href={`/projects/${project.slug}`}>{img}</Link>
                   </div>
                   <span className={classes.title}>
-                    {" "}
                     <h5>
                       <Link href={`/projects/${project._id}`}>
                         {project.title}
@@ -93,9 +94,11 @@ function ProjectsSection({ projects, mainPage }) {
                   </span>
                   <div className={classes.body}>
                     <div className={classes.tech}>
-                      <strong>Tech:</strong>{" "}
-                      {project.stack.map((tech, i) => (
-                        <ProjectBadge key={i}>{tech}</ProjectBadge>
+                      <strong>Tech:</strong>
+                      {project.stack.map((tech) => (
+                        <ProjectBadge key={`${project.id}-${tech}`}>
+                          {tech}
+                        </ProjectBadge>
                       ))}
                     </div>
                     <div className={classes.description}>
@@ -104,7 +107,7 @@ function ProjectsSection({ projects, mainPage }) {
                     </div>
                   </div>
                   <div className={classes.viewBtn}>
-                    <ViewButton link={true} href={`/projects/${project.slug}`}>
+                    <ViewButton link href={`/projects/${project.slug}`}>
                       View Project
                     </ViewButton>
                   </div>
@@ -115,7 +118,7 @@ function ProjectsSection({ projects, mainPage }) {
         </Row>
         {mainPage && (
           <div className={classes.viewAllDiv}>
-            <LinkWrapper to={"/projects/"}>
+            <LinkWrapper to="/projects/">
               <Button variant="primary" size="lg" id={classes.viewAllbtn}>
                 View All
               </Button>

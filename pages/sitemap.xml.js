@@ -1,8 +1,8 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-function SiteMap(props) {
-  return <div></div>;
+function SiteMap() {
+  return <div />;
 }
 
 export default SiteMap;
@@ -17,14 +17,14 @@ const createSitemap = (projects) => `<?xml version="1.0" encoding="UTF-8"?>
                 </url>
             `;
           })
-          .join("")}
+          .join('')}
     </urlset>
     `;
 
 export async function getServerSideProps({ res }) {
   const response = await axios.get(`${process.env.SERVER}/api/projects/`);
   const { data } = await response.data;
-  res.setHeader("Content-Type", "text/xml");
+  res.setHeader('Content-Type', 'text/xml');
   res.write(createSitemap(data));
   res.end();
   return { props: {} };

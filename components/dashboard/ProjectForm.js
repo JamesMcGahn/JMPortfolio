@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import MarkdownEditor from "../editor/MarkdownEditor";
+import React from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import MarkdownEditor from '../editor/MarkdownEditor';
 
 function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
   const handleEditor = (text, field) => {
@@ -28,7 +28,7 @@ function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
         <Form.Label>Main Page</Form.Label>
         <Form.Check
           type="checkbox"
-          id={`mainPage`}
+          id="mainPage"
           name="mainPage"
           value={form.mainPage}
           onChange={handleChange}

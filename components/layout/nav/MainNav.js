@@ -1,11 +1,12 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import classes from "../../../styles/Nav.module.css";
-import Link from "next/link";
-import { useRouter } from "next/router";
-function MainNav(props) {
+import React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import classes from '../../../styles/Nav.module.css';
+
+function MainNav() {
   const router = useRouter();
   return (
     <Container className={classes.container} fluid>
@@ -13,8 +14,8 @@ function MainNav(props) {
         <Container
           id={classes.innerCont}
           style={
-            router.pathname === "/projects" || router.pathname === "/art"
-              ? { background: "rgba(0, 0, 0, 0.5)" }
+            router.pathname === '/projects' || router.pathname === '/art'
+              ? { background: 'rgba(0, 0, 0, 0.5)' }
               : {}
           }
         >
