@@ -87,7 +87,7 @@ function ProjectsSection({ projects, mainPage }) {
                   </div>
                   <span className={classes.title}>
                     <h5>
-                      <Link href={`/projects/${project._id}`}>
+                      <Link href={`/projects/${project.slug}`}>
                         {project.title}
                       </Link>
                     </h5>
