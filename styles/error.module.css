@@ -1,6 +1,6 @@
 .error {
   padding: 10%;
-  min-height: 80vh;
+  min-height: 100vh;
   background-color: black;
   display: flex;
   justify-content: center;
@@ -19,12 +19,16 @@
 
 .message h1 {
   color: #75158f;
-  text-shadow: -1px -1px 2px #ff00fc, 1px 1px 2px #b7e3fe;
+  text-shadow:
+    -1px -1px 2px #ff00fc,
+    1px 1px 2px #b7e3fe;
 }
 
 .message h4 {
   color: #b7e3fe;
-  text-shadow: -1px -1px 2px #b7e3fe, 1px 1px 2px #ff00fc;
+  text-shadow:
+    -1px -1px 2px #b7e3fe,
+    1px 1px 2px #ff00fc;
 }
 
 .btnDiv {

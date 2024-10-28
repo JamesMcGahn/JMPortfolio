@@ -21,7 +21,8 @@ function Layout({ children }) {
           <MainNav />
         )}
         {children}
-        <Footer />
+
+        {!router.pathname === '_error' && <Footer />}
       </div>
     </>
   );
