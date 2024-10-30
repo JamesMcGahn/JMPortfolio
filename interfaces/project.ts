@@ -12,7 +12,7 @@ export interface Project {
   liveUrl: string;
 }
 
-interface ImageUrl {
+export interface ImageUrl {
   url: string;
   filename: string;
 }

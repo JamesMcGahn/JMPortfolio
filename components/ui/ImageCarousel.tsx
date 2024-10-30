@@ -1,6 +1,11 @@
 import Carousel from 'react-bootstrap/Carousel';
+import { ImageUrl } from '../../interfaces/project';
 
-function ImageCarousel({ imagesArr }) {
+interface Props {
+  imagesArr: ImageUrl[];
+}
+
+function ImageCarousel({ imagesArr }: Props) {
   const moreThanOneImg = imagesArr.length > 1;
 
   return (

@@ -2,7 +2,11 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import classes from '../../styles/loading.module.css';
 
-function Loading({ color }) {
+interface Props {
+  color: string;
+}
+
+function Loading({ color }: Props) {
   return (
     <div className={classes.loading}>
       <ReactLoading

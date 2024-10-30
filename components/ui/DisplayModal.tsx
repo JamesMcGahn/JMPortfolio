@@ -1,6 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 
-function DisplayModal({ show, setShow, children, title }) {
+interface Props {
+  show: boolean;
+  children: React.ReactNode;
+  title: string;
+  setShow: (n: boolean) => void;
+}
+
+function DisplayModal({ show, setShow, children, title }: Props) {
   const handleClose = () => setShow(false);
   return (
     <Modal show={show} onHide={handleClose} size="lg">

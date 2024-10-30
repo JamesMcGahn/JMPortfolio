@@ -5,7 +5,14 @@ import Link from 'next/link';
 import ProjectBadge from './ProjectBadge';
 import classes from '../../styles/projectsSection.module.css';
 
-function ProjectCard({ stack, description, title, id }) {
+interface Props {
+  stack: string[];
+  description: string;
+  title: string;
+  id: string;
+}
+
+function ProjectCard({ stack, description, title, id }: Props) {
   const img = <Card.Img variant="top" src="/img/headshot.jpg" />;
 
   return (
