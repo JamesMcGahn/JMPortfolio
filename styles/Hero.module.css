@@ -24,8 +24,24 @@
   animation: appear 3s;
   margin-top: 0%;
   overflow: hidden;
-  height: 100vh;
   opacity: 1;
+  
+}
+
+.image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: auto;
+}
+
+.image img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative !important;
 }
 
 @keyframes appear {
@@ -64,9 +80,11 @@
   color: #ff00fc;
   font-size: 1.2rem;
   margin-bottom: 3px;
+  position: absolute;
+  bottom: 0px;
 }
 
-@media (max-width: 916px) {
+/* @media (max-width: 916px) {
   .hero {
     background-position: top;
     background-size: contain;
@@ -74,4 +92,4 @@
     height: 0;
     padding-top: 56%;
   }
-}
+} */

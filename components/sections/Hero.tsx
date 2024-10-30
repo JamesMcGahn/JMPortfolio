@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import classes from '../../styles/Hero.module.css';
 
 interface Props {
@@ -18,6 +18,7 @@ function Hero({ h1, h2 }: Props) {
       <Container className={loading ? classes.hero : classes.heroLoading} fluid>
         <h1 id={classes.h1}>{h1}</h1>
         <h2 id={classes.h2}>{h2}</h2>
+        <div className={classes.image}>
         <Image
           src="/img/jmlogo4.jpg"
           alt="hero"
@@ -27,6 +28,7 @@ function Hero({ h1, h2 }: Props) {
           priority
           onLoadingComplete={() => setLoading(true)}
         />
+        </div>
         <div className={classes.chevron}>
           <a href="#about">
             <FontAwesomeIcon icon={faChevronDown} />
