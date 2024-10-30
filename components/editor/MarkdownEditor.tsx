@@ -2,10 +2,16 @@ import { useState } from 'react';
 import { MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 
-function MarkdownEditor({ cb, fieldName, defaultValue }) {
+interface Props {
+  cb: (text: string, field: string) => void;
+  fieldName: string;
+  defaultValue: string;
+}
+
+function MarkdownEditor({ cb, fieldName, defaultValue }: Props) {
   const [editorText, setEditorText] = useState(defaultValue);
 
-  const handleOnChange = (text) => {
+  const handleOnChange = (text: string) => {
     setEditorText(text);
     cb(text, fieldName);
   };

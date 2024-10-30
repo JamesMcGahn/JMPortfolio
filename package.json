@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "md-editor-rt": "^4.21.2",
     "mongoose": "^8.7.3",
     "next": "15.0.2",
     "next-auth": "^4.24.10",

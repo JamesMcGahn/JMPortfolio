@@ -1,8 +1,16 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Art } from '../../interfaces/art';
 
-function ArtForm({ validated, handleSubmit, handleChange, form }) {
+interface Props {
+  validated: boolean;
+  handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  form: Art;
+}
+
+function ArtForm({ validated, handleSubmit, handleChange, form }: Props) {
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="title">

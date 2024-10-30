@@ -3,9 +3,15 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import classes from '../../styles/dashBoardProjectTable.module.css';
+import { Project } from '../../interfaces/project';
 
-function DashboardProjectTable({ projects, handleDelete }) {
-  const handleModalDelete = (id, title) => {
+interface Props {
+  projects: Project[];
+  handleDelete: (id: string, title: string, type: string) => void;
+}
+
+function DashboardProjectTable({ projects, handleDelete }: Props) {
+  const handleModalDelete = (id: string, title: string) => {
     handleDelete(id, title, 'project');
   };
 

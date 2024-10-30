@@ -3,9 +3,15 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import classes from '../../styles/dashBoardImageTable.module.css';
+import { Art } from '../../interfaces/art';
 
-function DashboardImageTable({ art, handleDelete }) {
-  const handleModalDelete = (id, title) => {
+interface Props {
+  art: Art[];
+  handleDelete: (id: string, title: string, type: string) => void;
+}
+
+function DashboardImageTable({ art, handleDelete }: Props) {
+  const handleModalDelete = (id: string, title: string) => {
     handleDelete(id, title, 'image');
   };
 
@@ -23,10 +29,8 @@ function DashboardImageTable({ art, handleDelete }) {
         {art.map((artPiece) => (
           <tr className="d-flex" key={artPiece.title}>
             <td className="col-4">
-              {' '}
               <div className={classes.img}>
                 <Image
-                  variant="top"
                   src={artPiece.imageUrl[0].url}
                   thumbnail
                   alt="project image"

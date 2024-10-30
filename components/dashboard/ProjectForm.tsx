@@ -2,10 +2,32 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import MarkdownEditor from '../editor/MarkdownEditor';
+import { Project } from '../../interfaces/project';
 
-function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
-  const handleEditor = (text, field) => {
-    handleChange(null, { name: field, value: text });
+interface FieldChange {
+  name: string;
+  value: string;
+}
+
+interface Props {
+  validated: boolean;
+  handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEditor: (editorField: FieldChange) => void;
+  form: Project;
+  edit: boolean;
+}
+
+function ProjectForm({
+  validated,
+  handleSubmit,
+  handleEditor,
+  handleChange,
+  form,
+  edit,
+}: Props) {
+  const handleEditorChange = (text: string, field: string) => {
+    handleEditor({ name: field, value: text });
   };
 
   return (
@@ -30,7 +52,6 @@ function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
           type="checkbox"
           id="mainPage"
           name="mainPage"
-          value={form.mainPage}
           onChange={handleChange}
           checked={form.mainPage}
         />
@@ -81,7 +102,7 @@ function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
         </Form.Control.Feedback>
         <div>
           <MarkdownEditor
-            cb={handleEditor}
+            cb={handleEditorChange}
             fieldName="description"
             defaultValue={form.description}
           />
@@ -101,7 +122,7 @@ function ProjectForm({ validated, handleSubmit, handleChange, form, edit }) {
         </Form.Control.Feedback>
         <div>
           <MarkdownEditor
-            cb={handleEditor}
+            cb={handleEditorChange}
             fieldName="challenges"
             defaultValue={form.challenges}
           />
