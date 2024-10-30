@@ -1,10 +1,15 @@
 import React from 'react';
+import { NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import LinkWrapper from '../components/utils/LinkWrapper';
 import classes from '../styles/error.module.css';
 
-function DefaultErrorPage({ statusCode }) {
+interface Props {
+  statusCode: number;
+}
+
+function DefaultErrorPage({ statusCode }: Props) {
   const router = useRouter();
   return (
     <div className={classes.error}>
@@ -29,8 +34,8 @@ function DefaultErrorPage({ statusCode }) {
   );
 }
 
-DefaultErrorPage.getInitialProps = ({ res, err }) => {
-  // eslint-disable-next-line
+DefaultErrorPage.getInitialProps = ({ res, err }: NextPageContext) => {
+  // eslint-disable-next-line no-nested-ternary
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };

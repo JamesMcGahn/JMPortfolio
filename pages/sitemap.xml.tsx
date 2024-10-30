@@ -1,5 +1,7 @@
 import React from 'react';
+import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
+import { Project } from '../interfaces/project';
 
 function SiteMap() {
   return <div />;
@@ -7,7 +9,9 @@ function SiteMap() {
 
 export default SiteMap;
 
-const createSitemap = (projects) => `<?xml version="1.0" encoding="UTF-8"?>
+const createSitemap = (
+  projects: Project[],
+) => `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${projects
           .map(({ slug }) => {
@@ -21,7 +25,7 @@ const createSitemap = (projects) => `<?xml version="1.0" encoding="UTF-8"?>
     </urlset>
     `;
 
-export async function getServerSideProps({ res }) {
+export async function getServerSideProps({ res }: GetServerSidePropsContext) {
   const response = await axios.get(`${process.env.SERVER}/api/projects/`);
   const { data } = await response.data;
   res.setHeader('Content-Type', 'text/xml');

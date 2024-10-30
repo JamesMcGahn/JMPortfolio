@@ -9,9 +9,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-
-
-function MailerForm({ validated, handleSubmit, handleChange, children }:Props) {
+function MailerForm({
+  validated,
+  handleSubmit,
+  handleChange,
+  children,
+}: Props) {
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="user_name">

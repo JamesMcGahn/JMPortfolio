@@ -7,10 +7,9 @@ interface Props {
   handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   csrfToken: string;
-  action?: string
-  method?: "POST"
+  action?: string;
+  method?: 'POST';
 }
-
 
 function RegLogSignForm({
   validated,
@@ -19,7 +18,7 @@ function RegLogSignForm({
   csrfToken,
   action,
   method,
-}:Props) {
+}: Props) {
   return (
     <Form
       noValidate
