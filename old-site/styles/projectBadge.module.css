@@ -1,0 +1,7 @@
+.badge {
+  margin-left: 3px;
+  background-color: #150937 !important;
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7);
+  border: 1px solid #b7e3fe;
+  border-width: 1px;
+}

@@ -1,0 +1,37 @@
+* {
+  font-family: 'Noto Sans JP', sans-serif !important;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.nav-link.active {
+  color: #ff00fc !important;
+}
+
+div.invalid-feedback {
+  color: #b7e3fe !important;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #b7e3fe !important;
+}
+
+@media (max-width: 991px) {
+  #basic-navbar-nav.collapse.show {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    padding: 10%;
+  }
+  div.carousel.slide {
+    position: relative;
+    z-index: 0 !important;
+  }
+}

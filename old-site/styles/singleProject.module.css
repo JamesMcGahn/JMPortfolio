@@ -38,11 +38,7 @@
   width: 80vw;
   margin-top: 1rem;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(250, 250, 250, 0.9),
-    rgba(250, 250, 250, 0.5)
-  );
+  background: linear-gradient(180deg, rgba(250, 250, 250, 0.9), rgba(250, 250, 250, 0.5));
   box-shadow: 13px 12px 0 #b7e3fe;
   padding: 1rem;
 }
@@ -63,9 +59,7 @@
 
 .title {
   color: #75158f;
-  text-shadow:
-    -2px -2px 2px #ff00fc,
-    3px 3px 0px #b7e3fe;
+  text-shadow: -2px -2px 2px #ff00fc, 3px 3px 0px #b7e3fe;
   border-bottom: 4px solid #b7e3fe;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.7));
   text-align: center;

@@ -1,0 +1,23 @@
+.breakSection {
+  justify-content: center;
+}
+
+.iconSection {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.icon {
+  min-width: 5%;
+}
+
+.icon svg {
+  color: #fff;
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+  font-size: 4.5rem;
+}
+
+.icon svg:hover {
+  filter: drop-shadow(3px 3px 4px #ff00fc);
+}

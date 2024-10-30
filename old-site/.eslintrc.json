@@ -1,16 +1,10 @@
 {
-  "root": true,
   "extends": [
     "plugin:prettier/recommended",
     "airbnb",
-    "airbnb-typescript",
     "next/core-web-vitals",
-    "next/typescript",
     "prettier"
   ],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "off",
@@ -33,6 +27,6 @@
     "arrow-parens": "off",
     "arrow-body-style": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
