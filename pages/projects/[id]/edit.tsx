@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import classes from '../../../styles/addproject.module.css';
-import ProjectForm from '../../../components/dashboard/ProjectForm';
+import ProjectForm, {
+  FieldChange,
+} from '../../../components/dashboard/ProjectForm';
 import Loading from '../../../components/ui/Loading';
+import { Project as ProjectType } from '../../../interfaces/project';
 
-function EditSingleProject({ project }) {
+interface Props {
+  project: ProjectType;
+}
+
+function EditSingleProject({ project }: Props) {
   const [form, setForm] = useState(project);
   const [submitting, setSubmitting] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -22,7 +30,7 @@ function EditSingleProject({ project }) {
           `${process.env.NEXT_PUBLIC_SERVER}/api/projects/${project._id}`,
           form,
         )
-        .then((res) => {
+        .then(() => {
           setSubmitting(false);
           router.push(router.asPath);
         });
@@ -31,7 +39,7 @@ function EditSingleProject({ project }) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false) {
       e.stopPropagation();
@@ -41,17 +49,20 @@ function EditSingleProject({ project }) {
     }
   };
 
-  const handleChange = (e, editorField) => {
+  const handleEditor = (editorField: FieldChange) => {
     if (editorField?.name) {
       setForm((prev) => ({
         ...prev,
         [editorField.name]: editorField.value,
       }));
-      return;
     }
+  };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'imageUrl' || e.target.name === 'adtlImg') {
-      setForm({ ...form, [e.target.name]: [...e.target.files] });
+      if (e.target.files) {
+        setForm({ ...form, [e.target.name]: [...e.target.files] });
+      }
     } else if (e.target.name === 'mainPage') {
       setForm({ ...form, [e.target.name]: e.target.checked });
     } else if (e) {
@@ -76,6 +87,7 @@ function EditSingleProject({ project }) {
           <ProjectForm
             validated={validated}
             handleSubmit={handleSubmit}
+            handleEditor={handleEditor}
             handleChange={handleChange}
             form={form}
             edit
@@ -88,7 +100,9 @@ function EditSingleProject({ project }) {
 
 export default EditSingleProject;
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const session = await getSession(context);
   if (!session) {
     return {

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import MarkdownEditor from '../editor/MarkdownEditor';
 import { Project } from '../../interfaces/project';
 
-interface FieldChange {
+export interface FieldChange {
   name: string;
   value: string;
 }

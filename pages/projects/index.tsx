@@ -3,8 +3,13 @@ import PageHead from '../../components/layout/PageHead';
 import ProjectsSection from '../../components/sections/ProjectsSection';
 import dbConnect from '../../utils/dbConnect';
 import Project from '../../models/Project';
+import { Project as ProjectType } from '../../interfaces/project';
 
-function Projects({ projects }) {
+interface Props {
+  projects: ProjectType[];
+}
+
+function Projects({ projects }: Props) {
   return (
     <div>
       <PageHead title="James McGahn | Projects" />

@@ -10,8 +10,7 @@ function FourOneFourPage() {
   return (
     <div className={classes.error}>
       <div className={classes.message}>
-        <h1>
-          Ohhh...no... Page Not Found</h1>
+        <h1>Ohhh...no... Page Not Found</h1>
         <h4>Are You Sure You Are Supposed to Be Here?</h4>
         <div className={classes.btnDiv}>
           <LinkWrapper to="/">

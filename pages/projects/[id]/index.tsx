@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GetStaticPropsContext } from 'next';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import Head from 'next/head';
@@ -17,8 +18,14 @@ import DisplayModal from '../../../components/ui/DisplayModal';
 import dbConnect from '../../../utils/dbConnect';
 import Project from '../../../models/Project';
 import Loading from '../../../components/ui/Loading';
+import { Project as ProjectType } from '../../../interfaces/project';
 
-function SingleProject({ project, notFound }) {
+interface Props {
+  project: ProjectType;
+  notFound: boolean;
+}
+
+function SingleProject({ project, notFound }: Props) {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
@@ -61,11 +68,7 @@ function SingleProject({ project, notFound }) {
                     role="button"
                     tabIndex={-1}
                   >
-                    <ImageCarousel
-                      imagesArr={project.imageUrl}
-                      height={290}
-                      width={480}
-                    />
+                    <ImageCarousel imagesArr={project.imageUrl} />
                   </div>
                   <div className={classes.subtitle}>
                     <strong>Summary: </strong>
@@ -98,7 +101,7 @@ function SingleProject({ project, notFound }) {
                   <div className={classes.projectInfo}>
                     <div className={classes.tech}>
                       <strong>Tech Used:</strong>
-                      {project.stack.map((tech) => (
+                      {project.stack.map((tech: string) => (
                         <ProjectBadge key={`${tech}-stack`}>
                           {tech}
                         </ProjectBadge>
@@ -124,7 +127,7 @@ function SingleProject({ project, notFound }) {
           <ViewButton>Go Back</ViewButton>
         </LinkWrapper>
       </div>
-      <DisplayModal show={show} setShow={setShow} project={project}>
+      <DisplayModal show={show} setShow={setShow} title={project.title}>
         <ImageCarousel imagesArr={project.imageUrl} />
       </DisplayModal>
     </Container>
@@ -139,20 +142,20 @@ export async function getStaticPaths() {
       `${process.env.NEXT_PUBLIC_SERVER}/api/projects/`,
     );
     const { data } = await res.data;
-    const paths = data.map((project) => ({
+    const paths = data.map((project: ProjectType) => ({
       params: { id: project.slug },
     }));
     return { paths, fallback: true };
   } catch (e) {
-    const paths = [];
+    const paths: string[] = [];
     return { paths, fallback: true };
   }
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   try {
     await dbConnect();
-    const { id } = context.params;
+    const { id } = context.params as { id: string };
     const project = await Project.findOne({ slug: id }).lean();
 
     if (!project) {

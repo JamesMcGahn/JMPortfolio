@@ -4,15 +4,15 @@ import LinkWrapper from '../utils/LinkWrapper';
 import classes from '../../styles/ViewButton.module.css';
 
 interface Props {
-  link: boolean;
-  href: string;
+  link?: boolean;
+  href?: string;
   children: React.ReactNode;
 }
 
 function ViewButton({ link, href, children }: Props) {
   return (
     <div className={classes.btnDiv}>
-      {link ? (
+      {link && href ? (
         <LinkWrapper to={href}>
           <Button variant="primary" size="lg" className={classes.view}>
             {children}

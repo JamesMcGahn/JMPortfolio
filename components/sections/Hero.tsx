@@ -19,15 +19,15 @@ function Hero({ h1, h2 }: Props) {
         <h1 id={classes.h1}>{h1}</h1>
         <h2 id={classes.h2}>{h2}</h2>
         <div className={classes.image}>
-        <Image
-          src="/img/jmlogo4.jpg"
-          alt="hero"
-          layout="fill"
-          quality="100"
-          objectFit="cover"
-          priority
-          onLoadingComplete={() => setLoading(true)}
-        />
+          <Image
+            src="/img/jmlogo4.jpg"
+            alt="hero"
+            layout="fill"
+            quality="100"
+            objectFit="cover"
+            priority
+            onLoadingComplete={() => setLoading(true)}
+          />
         </div>
         <div className={classes.chevron}>
           <a href="#about">

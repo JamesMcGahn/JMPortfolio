@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Row from 'react-bootstrap/Row';
@@ -11,9 +12,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import classes from '../../../styles/addproject.module.css';
 import Loading from '../../../components/ui/Loading';
+import { Project as ProjectType } from '../../../interfaces/project';
 
-function EditSingleProjectImages({ project, id }) {
-  const [form, setForm] = useState({
+interface Props {
+  project: ProjectType;
+  id: string;
+}
+
+interface FormState {
+  imageUrl: File[];
+  deleteImage: string[];
+}
+function EditSingleProjectImages({ project, id }: Props) {
+  const [form, setForm] = useState<FormState>({
     imageUrl: [],
     deleteImage: [],
   });
@@ -33,7 +44,7 @@ function EditSingleProjectImages({ project, id }) {
           sendForm,
           { headers: { 'content-type': 'multipart/form-data' } },
         )
-        .then((res) => {
+        .then(() => {
           setSubmitting(false);
           setForm({
             imageUrl: [],
@@ -46,7 +57,7 @@ function EditSingleProjectImages({ project, id }) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false) {
       e.stopPropagation();
@@ -57,9 +68,11 @@ function EditSingleProjectImages({ project, id }) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'imageUrl') {
-      setForm({ ...form, [e.target.name]: [...e.target.files] });
+      if (e.target.files) {
+        setForm({ ...form, [e.target.name]: [...e.target.files] });
+      }
     }
     if (e.target.name === 'delete[]') {
       if (e.target.checked) {
@@ -138,7 +151,9 @@ function EditSingleProjectImages({ project, id }) {
 
 export default EditSingleProjectImages;
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const session = await getSession(context);
   if (!session) {
     return {

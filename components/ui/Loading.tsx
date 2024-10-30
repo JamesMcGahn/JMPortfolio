@@ -3,7 +3,7 @@ import ReactLoading from 'react-loading';
 import classes from '../../styles/loading.module.css';
 
 interface Props {
-  color: string;
+  color?: string;
 }
 
 function Loading({ color }: Props) {
