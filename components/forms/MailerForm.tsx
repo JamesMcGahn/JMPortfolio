@@ -2,7 +2,16 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function MailerForm({ validated, handleSubmit, handleChange, children }) {
+interface Props {
+  validated: boolean;
+  handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  children: React.ReactNode;
+}
+
+
+
+function MailerForm({ validated, handleSubmit, handleChange, children }:Props) {
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="user_name">

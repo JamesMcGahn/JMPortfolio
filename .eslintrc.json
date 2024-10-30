@@ -33,6 +33,7 @@
     "arrow-parens": "off",
     "arrow-body-style": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "react/require-default-props": "off"
   }
 }

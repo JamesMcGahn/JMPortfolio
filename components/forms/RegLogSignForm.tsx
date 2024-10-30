@@ -2,6 +2,16 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+interface Props {
+  validated: boolean;
+  handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  csrfToken: string;
+  action?: string
+  method?: "POST"
+}
+
+
 function RegLogSignForm({
   validated,
   handleSubmit,
@@ -9,7 +19,7 @@ function RegLogSignForm({
   csrfToken,
   action,
   method,
-}) {
+}:Props) {
   return (
     <Form
       noValidate

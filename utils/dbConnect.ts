@@ -5,10 +5,10 @@ async function dbConnect() {
         return
     }
     try {
-        const db = await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+        if (process.env.MONGO_URI) {
+            await mongoose.connect(process.env.MONGO_URI)
+        }
+
     } catch (error) {
         console.error(error)
     }
