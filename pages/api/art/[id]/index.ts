@@ -1,8 +1,11 @@
 import { getServerSession } from 'next-auth/next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '../../auth/[...nextauth]';
 import dbConnect from '../../../../utils/dbConnect';
 import Art from '../../../../models/Art';
+import { ImageUrl } from '../../../../interfaces/project';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -11,7 +14,14 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-export default async function artId(req, res) {
+interface NextApiRequestWithFiles extends NextApiRequest {
+  files: Express.Multer.File[];
+}
+
+export default async function artId(
+  req: NextApiRequestWithFiles,
+  res: NextApiResponse,
+) {
   const {
     query: { id },
     method,
@@ -38,8 +48,8 @@ export default async function artId(req, res) {
           const art = await Art.findByIdAndDelete(id);
           const images = art.imageUrl;
 
-          const results = [];
-          images.forEach((pic) => {
+          const results: Promise<void>[] = [];
+          images.forEach((pic: ImageUrl) => {
             results.push(cloudinary.uploader.destroy(pic.filename));
           });
           await Promise.all(results);

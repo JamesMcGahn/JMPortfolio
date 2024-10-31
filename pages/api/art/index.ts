@@ -1,11 +1,12 @@
-import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import pify from 'pify';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 import dbConnect from '../../../utils/dbConnect';
 import Art from '../../../models/Art';
+import promisifyMiddleware from '../../../middleware/promisfyMiddleware';
+import multerUpload from '../../../middleware/multerMiddleWare';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -14,23 +15,14 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'jamesmcgahn',
-    allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
-  },
-});
+interface NextApiRequestWithFiles extends NextApiRequest {
+  files: Express.Multer.File[];
+}
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-const upload = pify(multer({ storage }).array('imageUrl'));
-
-export default async function art(req, res) {
+export default async function art(
+  req: NextApiRequestWithFiles,
+  res: NextApiResponse,
+) {
   const { method } = req;
   const session = await getServerSession(req, res, authOptions);
   await dbConnect();
@@ -48,7 +40,7 @@ export default async function art(req, res) {
       if (session) {
         try {
           await dbConnect();
-          await upload(req, res);
+          await promisifyMiddleware(req, res, multerUpload);
 
           const newArt = await Art.create(req.body);
           newArt.imageUrl = req.files.map((image) => ({
@@ -68,3 +60,9 @@ export default async function art(req, res) {
       break;
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
