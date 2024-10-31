@@ -3,14 +3,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '../auth/[...nextauth]';
 import dbConnect from '../../../utils/dbConnect';
 import Project from '../../../models/Project';
-import promisifyMiddleware from '../../../middleware/promisfyMiddleware'
-import multerUpload from '../../../middleware/multerMiddleWare'
+import promisifyMiddleware from '../../../middleware/promisfyMiddleware';
+import multerUpload from '../../../middleware/multerMiddleWare';
 
 interface NextApiRequestWithFiles extends NextApiRequest {
   files: Express.Multer.File[];
 }
 
-export default async function getProject(req:NextApiRequestWithFiles, res:NextApiResponse) {
+export default async function getProject(
+  req: NextApiRequestWithFiles,
+  res: NextApiResponse,
+) {
   const { method } = req;
   const session = await getServerSession(req, res, authOptions);
   switch (method) {
@@ -36,7 +39,7 @@ export default async function getProject(req:NextApiRequestWithFiles, res:NextAp
           }));
           project.stack = req.body.stack
             .split(',')
-            .map((item:string) => item.trim().toLowerCase());
+            .map((item: string) => item.trim().toLowerCase());
           await project.save();
           res.status(201).send({ project: project.slug });
         } catch (err) {
@@ -50,7 +53,6 @@ export default async function getProject(req:NextApiRequestWithFiles, res:NextAp
       break;
   }
 }
-
 
 export const config = {
   api: {

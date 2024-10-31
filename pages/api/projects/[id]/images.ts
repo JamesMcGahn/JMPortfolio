@@ -16,12 +16,6 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 interface NextApiRequestWithFiles extends NextApiRequest {
   files: Express.Multer.File[];
 }
@@ -70,3 +64,9 @@ export default async function imagesUpdate(
     }
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
