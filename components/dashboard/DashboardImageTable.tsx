@@ -7,7 +7,7 @@ import { Art } from '../../interfaces/art';
 
 interface Props {
   art: Art[];
-  handleDelete: (id: string, title: string, type: string) => void;
+  handleDelete: (id: string, title: string, type: 'project' | 'image') => void;
 }
 
 function DashboardImageTable({ art, handleDelete }: Props) {

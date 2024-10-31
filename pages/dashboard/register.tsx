@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { getSession } from 'next-auth/react';
@@ -19,13 +20,13 @@ function Register() {
         .post(`${process.env.NEXT_PUBLIC_SERVER}/api/auth/signup`, form, {
           headers: { 'Content-Type': 'application/json' },
         })
-        .then((res) => router.push('/dashboard'));
+        .then(() => router.push('/dashboard'));
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false) {
       e.stopPropagation();
@@ -35,7 +36,7 @@ function Register() {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -50,7 +51,7 @@ function Register() {
         handleChange={handleChange}
         validated={validated}
         handleSubmit={handleSubmit}
-        csrfToken={false}
+        csrfToken=""
       />
     </div>
   );
@@ -58,7 +59,9 @@ function Register() {
 
 export default Register;
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const session = await getSession(context);
   if (!session) {
     return {

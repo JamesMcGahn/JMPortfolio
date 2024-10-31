@@ -7,7 +7,7 @@ import { Project } from '../../interfaces/project';
 
 interface Props {
   projects: Project[];
-  handleDelete: (id: string, title: string, type: string) => void;
+  handleDelete: (id: string, title: string, type: 'project' | 'image') => void;
 }
 
 function DashboardProjectTable({ projects, handleDelete }: Props) {

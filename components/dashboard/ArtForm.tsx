@@ -1,13 +1,18 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Art } from '../../interfaces/art';
+
+export interface FormState {
+  title: string;
+
+  imageUrl: File[];
+}
 
 interface Props {
   validated: boolean;
   handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  form: Art;
+  form: FormState;
 }
 
 function ArtForm({ validated, handleSubmit, handleChange, form }: Props) {

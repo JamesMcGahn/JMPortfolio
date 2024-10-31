@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { GetServerSidePropsContext } from 'next';
 import { getCsrfToken } from 'next-auth/react';
 import classes from '../../styles/RegLogSignForm.module.css';
 import RegLogSignForm from '../../components/forms/RegLogSignForm';
 
-function Login(props) {
-  const [validated, setValidated] = useState(false);
-  const [form, setForm] = useState();
-  const { csrfToken } = props;
+interface Props {
+  csrfToken: string;
+}
 
-  const handleSubmit = async (e) => {
+function Login({ csrfToken }: Props) {
+  const [validated, setValidated] = useState(false);
+  const [form, setForm] = useState({});
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     if (e.currentTarget.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
@@ -16,7 +20,7 @@ function Login(props) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -42,7 +46,7 @@ function Login(props) {
 
 export default Login;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       csrfToken: await getCsrfToken(context),

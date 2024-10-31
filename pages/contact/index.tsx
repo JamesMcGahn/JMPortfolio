@@ -10,8 +10,8 @@ function ContactPage() {
   const [validated, setValidated] = useState(false);
   const [captcha, setCaptcha] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState();
-  const [error, setError] = useState();
+  const [success, setSuccess] = useState<boolean>();
+  const [error, setError] = useState<boolean>();
   const [form, setForm] = useState({
     user_name: '',
     user_email: '',
@@ -19,7 +19,8 @@ function ContactPage() {
     message: '',
   });
 
-  async function onChange(value) {
+  async function onChange(value: string) {
+    console.log('sss', value);
     try {
       await axios
         .post(`${process.env.NEXT_PUBLIC_SERVER}/api/captcha`, {
@@ -36,7 +37,7 @@ function ContactPage() {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (e.currentTarget.checkValidity() === false || captcha === false) {
       e.stopPropagation();
@@ -74,7 +75,7 @@ function ContactPage() {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 

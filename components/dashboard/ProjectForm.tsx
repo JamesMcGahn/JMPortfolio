@@ -2,7 +2,18 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import MarkdownEditor from '../editor/MarkdownEditor';
-import { Project } from '../../interfaces/project';
+
+export interface FormState {
+  title: string;
+  subtitle: string;
+  mainPage: boolean;
+  stack: string[];
+  description: string;
+  challenges: string;
+  imageUrl: File[];
+  gitUrl: string;
+  liveUrl: string;
+}
 
 export interface FieldChange {
   name: string;
@@ -14,7 +25,7 @@ interface Props {
   handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleEditor: (editorField: FieldChange) => void;
-  form: Project;
+  form: FormState;
   edit: boolean;
 }
 
