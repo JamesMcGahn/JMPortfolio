@@ -9,6 +9,7 @@ import classes from '../../styles/RegLogSignForm.module.css';
 function Register() {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({
+    name: '',
     username: '',
     password: '',
   });

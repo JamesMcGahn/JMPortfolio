@@ -1,6 +1,10 @@
 import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function mailer(req, res) {
+export default async function mailer(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { method } = req;
 
   switch (method) {

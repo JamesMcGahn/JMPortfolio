@@ -1,6 +1,10 @@
 import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function captcha(req, res) {
+export default async function captcha(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { method } = req;
 
   switch (method) {

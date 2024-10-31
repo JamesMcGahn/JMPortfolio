@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import dbConnect from '../../../utils/dbConnect';
 import User from '../../../models/User';
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Login',
@@ -13,12 +13,17 @@ export const authOptions = {
         password: { label: 'password', type: 'password', placeholder: '' },
       },
 
-      async authorize(credentials, req) {
+      async authorize(
+        credentials: Record<'username' | 'password', string> | undefined,
+      ) {
         try {
           await dbConnect();
+          if (!credentials?.username) {
+            return null;
+          }
+
           const { username } = credentials;
           const userFound = await User.findOne({ username });
-
           if (!userFound) {
             return null;
           }
@@ -26,11 +31,15 @@ export const authOptions = {
             credentials.password,
             userFound.password,
           );
-
           if (valid) {
-            return { email: username };
+            return {
+              id: userFound._id,
+              name: userFound.name,
+              email: userFound.username,
+            };
           }
-          return '/dashboard/error';
+          return null;
+          // return '/dashboard/error';
         } catch (e) {
           console.log(e);
           return null;
@@ -54,10 +63,7 @@ export const authOptions = {
     error: '/error',
   },
   session: {
-    jwt: true,
-  },
-  jwt: {
-    signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+    strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
