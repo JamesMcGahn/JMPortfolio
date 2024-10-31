@@ -22,11 +22,10 @@ function Hero({ h1, h2 }: Props) {
           <Image
             src="/img/jmlogo4.jpg"
             alt="hero"
-            layout="fill"
+            fill
             quality="100"
-            objectFit="cover"
             priority
-            onLoadingComplete={() => setLoading(true)}
+            onLoad={() => setLoading(true)}
           />
         </div>
         <div className={classes.chevron}>
