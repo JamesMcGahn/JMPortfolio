@@ -10,12 +10,17 @@ import classes from '../../styles/art.module.css';
 import dbConnect from '../../utils/dbConnect';
 import Art from '../../models/Art';
 import DisplayModal from '../../components/ui/DisplayModal';
+import { Art as ArtType } from '../../interfaces/art';
 
-function ArtPage({ art }) {
+interface Props {
+  art: ArtType[];
+}
+
+function ArtPage({ art }: Props) {
   const [show, setShow] = useState(false);
   const [modalItem, setModalItem] = useState({ title: '', img: '' });
 
-  const handleClick = (title, img) => {
+  const handleClick = (title: string, img: string) => {
     setModalItem({ title: title, img: img });
     setShow(true);
   };
@@ -43,7 +48,6 @@ function ArtPage({ art }) {
                 >
                   <div className={classes.projectImg}>
                     <Image
-                      variant="top"
                       src={artP.imageUrl[0].url}
                       layout="fill"
                       alt={artP.title}
@@ -56,12 +60,7 @@ function ArtPage({ art }) {
         </Row>
       </div>
       <DisplayModal title={modalItem.title} show={show} setShow={setShow}>
-        <BootImage
-          variant="top"
-          src={`${modalItem.img}`}
-          fluid
-          alt={modalItem.title}
-        />
+        <BootImage src={`${modalItem.img}`} fluid alt={modalItem.title} />
       </DisplayModal>
     </Container>
   );
