@@ -38,7 +38,10 @@ function AddProject() {
     sendForm.append('stack', JSON.stringify(form.stack));
     sendForm.append('description', form.description);
     sendForm.append('challenges', form.challenges);
-    form.imageUrl.forEach((file) => sendForm.append('imageUrl', file));
+    if (form.imageUrl && form.imageUrl.every((item) => item instanceof File)) {
+      form.imageUrl.forEach((file) => sendForm.append('imageUrl', file));
+    }
+    
 
     sendForm.append('gitUrl', form.gitUrl);
     sendForm.append('liveUrl', form.liveUrl);
