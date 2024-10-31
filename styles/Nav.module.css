@@ -12,7 +12,9 @@ div.container {
 #nav a {
   color: white;
   font-size: 1.3rem;
-  text-shadow: -1px -1px 1px #ff00fc, -1px -1px 5px black;
+  text-shadow:
+    -1px -1px 1px #ff00fc,
+    -1px -1px 5px black;
 }
 /* for active link styles -- check global sheet */
 @media (max-width: 991px) {

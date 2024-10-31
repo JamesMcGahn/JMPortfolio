@@ -18,13 +18,17 @@
 
 .formDiv h3 {
   color: #75158f;
-  text-shadow: -1px -1px 2px #ff00fc, 1px 1px 2px #b7e3fe;
+  text-shadow:
+    -1px -1px 2px #ff00fc,
+    1px 1px 2px #b7e3fe;
 }
 .formDiv h1 {
   font-size: 4rem;
   color: #75158f;
   font-size: 80px;
-  text-shadow: -2px -2px 2px #ff00fc, 3px 3px 0px #b7e3fe;
+  text-shadow:
+    -2px -2px 2px #ff00fc,
+    3px 3px 0px #b7e3fe;
   margin-bottom: 15px;
 }
 
