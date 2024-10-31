@@ -10,7 +10,7 @@ import ProjectBadge from '../ui/ProjectBadge';
 import ViewButton from '../ui/ViewButton';
 import classes from '../../styles/projectsSection.module.css';
 import LinkWrapper from '../utils/LinkWrapper';
-import { stackOptions } from '../../constants/projectStackOpts';
+import stackOptions from '../../constants/projectStackOpts';
 import { Project } from '../../interfaces/project';
 
 interface Props {
