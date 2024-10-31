@@ -1,4 +1,4 @@
-export const stackOptions = [
+const stackOptions = [
   'All',
   'Bootstrap',
   'Tailwind CSS',
@@ -8,3 +8,5 @@ export const stackOptions = [
   'React',
   'PHP',
 ];
+
+export default stackOptions;

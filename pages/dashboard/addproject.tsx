@@ -41,7 +41,6 @@ function AddProject() {
     if (form.imageUrl && form.imageUrl.every((item) => item instanceof File)) {
       form.imageUrl.forEach((file) => sendForm.append('imageUrl', file));
     }
-    
 
     sendForm.append('gitUrl', form.gitUrl);
     sendForm.append('liveUrl', form.liveUrl);

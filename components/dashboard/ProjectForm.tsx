@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import MarkdownEditor from '../editor/MarkdownEditor';
-import {ImageUrl} from '../../interfaces/project'
+import { ImageUrl } from '../../interfaces/project';
 
 export interface FormState {
   title: string;
@@ -41,7 +41,7 @@ function ProjectForm({
   const handleEditorChange = (text: string, field: string) => {
     handleEditor({ name: field, value: text });
   };
-  
+
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="title">

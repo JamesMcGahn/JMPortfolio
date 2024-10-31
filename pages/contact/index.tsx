@@ -19,7 +19,7 @@ function ContactPage() {
     message: '',
   });
 
-  async function onChange(value: string| null) {
+  async function onChange(value: string | null) {
     try {
       await axios
         .post(`${process.env.NEXT_PUBLIC_SERVER}/api/captcha`, {
