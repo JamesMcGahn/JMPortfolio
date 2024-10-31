@@ -30,6 +30,21 @@ function RegLogSignForm({
       {csrfToken ? (
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
       ) : null}
+      {!csrfToken && (
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="name"
+            name="name"
+            onChange={handleChange}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Enter a Name
+          </Form.Control.Feedback>
+        </Form.Group>
+      )}
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control

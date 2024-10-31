@@ -1,8 +1,11 @@
 import { getServerSession } from 'next-auth/next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import dbConnect from '../../../../utils/dbConnect';
 import Project from '../../../../models/Project';
 import { authOptions } from '../../auth/[...nextauth]';
+import { ImageUrl } from '../../../../interfaces/project';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -11,7 +14,14 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-export default async function getProjectId(req, res) {
+interface NextApiRequestWithFiles extends NextApiRequest {
+  files: Express.Multer.File[];
+}
+
+export default async function getProjectId(
+  req: NextApiRequestWithFiles,
+  res: NextApiResponse,
+) {
   const {
     query: { id },
     method,
@@ -26,7 +36,7 @@ export default async function getProjectId(req, res) {
         let project = null;
         const checkForHexRegExp = /^[0-9a-fA-F]{24}$/;
 
-        if (checkForHexRegExp.test(id)) {
+        if (checkForHexRegExp.test(id as string)) {
           project = await Project.findById(id);
         } else {
           project = await Project.findOne({ slug: id });
@@ -60,8 +70,8 @@ export default async function getProjectId(req, res) {
         try {
           const project = await Project.findByIdAndDelete(id);
           const images = project.imageUrl;
-          const results = [];
-          images.forEach((pic) => {
+          const results: Promise<void>[] = [];
+          images.forEach((pic: ImageUrl) => {
             results.push(cloudinary.uploader.destroy(pic.filename));
           });
           await Promise.all(results);

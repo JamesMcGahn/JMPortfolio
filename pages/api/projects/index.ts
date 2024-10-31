@@ -1,36 +1,16 @@
 import { getServerSession } from 'next-auth/next';
-import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import pify from 'pify';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '../auth/[...nextauth]';
 import dbConnect from '../../../utils/dbConnect';
 import Project from '../../../models/Project';
+import promisifyMiddleware from '../../../middleware/promisfyMiddleware'
+import multerUpload from '../../../middleware/multerMiddleWare'
 
-const cloudinary = require('cloudinary').v2;
+interface NextApiRequestWithFiles extends NextApiRequest {
+  files: Express.Multer.File[];
+}
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_SECRET,
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'jamesmcgahn',
-    allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
-  },
-});
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-const upload = pify(multer({ storage }).array('imageUrl'));
-
-export default async function getProject(req, res) {
+export default async function getProject(req:NextApiRequestWithFiles, res:NextApiResponse) {
   const { method } = req;
   const session = await getServerSession(req, res, authOptions);
   switch (method) {
@@ -47,7 +27,7 @@ export default async function getProject(req, res) {
       if (session) {
         try {
           await dbConnect();
-          await upload(req, res);
+          await promisifyMiddleware(req, res, multerUpload);
 
           const project = await Project.create(req.body);
           project.imageUrl = req.files.map((image) => ({
@@ -56,7 +36,7 @@ export default async function getProject(req, res) {
           }));
           project.stack = req.body.stack
             .split(',')
-            .map((item) => item.trim().toLowerCase());
+            .map((item:string) => item.trim().toLowerCase());
           await project.save();
           res.status(201).send({ project: project.slug });
         } catch (err) {
@@ -70,3 +50,10 @@ export default async function getProject(req, res) {
       break;
   }
 }
+
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};

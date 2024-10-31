@@ -13,11 +13,11 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary:cloudinary,
+  cloudinary: cloudinary,
   params: {
     folder: 'jamesmcgahn',
     allowed_formats: ['jpeg', 'png', 'jpg', 'gif'],
-  }as {
+  } as {
     folder: string;
     allowed_formats: string[];
   },
@@ -29,10 +29,18 @@ export const config = {
   },
 };
 
-const multerUpload = multer({ storage })
+const multerUpload = multer({ storage });
 
-const multerMiddleware = (req: NextApiRequest, res: NextApiResponse, next: NextFunction) => {
-  multerUpload.array('imageUrl')(req as unknown as Request, res as unknown as Response, next);
+const multerMiddleware = (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: NextFunction,
+) => {
+  multerUpload.array('imageUrl')(
+    req as unknown as Request,
+    res as unknown as Response,
+    next,
+  );
 };
 
-export default multerMiddleware
+export default multerMiddleware;
